@@ -3,25 +3,30 @@ import { View, Button, TextInput, StyleSheet, Text, Modal } from "react-native"
 import DateTimePicker from "@react-native-community/datetimepicker"
 
 function InputEvent(props) {
+	let eventNameCount = 0
+
 	const [date, setDate] = useState(new Date())
 	const [show, setShow] = useState(false)
+	const [eventName, setEventName] = useState("")
+	const [showNoNameWarning, setShowNoNameWarning] = useState(false)
+
 	const onChange = (event, selectedDate) => {
 		setShow(false)
 		setDate(selectedDate)
 	}
-	const showDatepicker = () => {
-		setShow(true)
-	}
-
-	const [eventName, setEventName] = useState("")
 
 	function handleInput(eventName) {
 		setEventName(eventName)
 	}
 
 	function addEvent() {
-		props.onAddEvent(eventName)
-		setEventName("")
+		if (eventName == "") {
+			setShowNoNameWarning(true)
+		} else {
+			props.onAddEvent(eventName, date)
+			setEventName("")
+			setShowNoNameWarning(false)
+		}
 	}
 
 	return (
@@ -29,16 +34,19 @@ function InputEvent(props) {
 			<View style={styles.inputContainer}>
 				<TextInput
 					placeholder="Event Name"
+					placeholderTextColor={showNoNameWarning ? "red" : ""}
 					style={styles.inputText}
 					onChangeText={handleInput}
 					value={eventName}
 				/>
 				<DateTimePicker
 					style={styles.dateTimePicker}
+					minimumDate={new Date()}
 					testID="dateTimePicker"
 					value={date}
 					is24Hour={true}
 					onChange={onChange}
+					display="spinner"
 				/>
 				<View>
 					<Button
@@ -46,9 +54,15 @@ function InputEvent(props) {
 						title="Add Event"
 						onPress={addEvent}
 					/>
-					<Button title="Cancel" onPress={props.onCancel} />
+					<Button
+						title="Cancel"
+						onPress={() => {
+							props.onCancel()
+							setShowNoNameWarning(false)
+							setEventName("")
+						}}
+					/>
 				</View>
-				<Text>selected: {date.toLocaleDateString()}</Text>
 			</View>
 		</Modal>
 	)
@@ -76,9 +90,8 @@ const styles = StyleSheet.create({
 	addButton: {
 		padding: 10,
 	},
-	buttonContainer: {},
 	dateTimePicker: {
-		width: 100,
+		width: 300,
 		padding: 30,
 	},
 })
