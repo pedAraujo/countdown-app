@@ -32,6 +32,9 @@ function InputEvent(props) {
 	return (
 		<Modal visible={props.visible} animationType="slide">
 			<View style={styles.inputContainer}>
+				<View style={styles.upTextView}>
+					<Text style={styles.upText}>Add event</Text>
+				</View>
 				<TextInput
 					placeholder="Event Name"
 					placeholderTextColor={showNoNameWarning ? "red" : ""}
@@ -48,12 +51,10 @@ function InputEvent(props) {
 					onChange={onChange}
 					display="spinner"
 				/>
-				<View>
-					<Button
-						style={styles.addButton}
-						title="Add Event"
-						onPress={addEvent}
-					/>
+				<View style={styles.addButton}>
+					<Button title="Add Event" onPress={addEvent} />
+				</View>
+				<View style={styles.cancelButton}>
 					<Button
 						title="Cancel"
 						onPress={() => {
@@ -75,12 +76,11 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
-		padding: 10,
-		borderRadius: 6,
-		backgroundColor: "yellow",
 	},
 	inputText: {
-		width: "80%",
+		width: "70%",
+		height: 35,
+		maxWidth: "80%",
 		borderWidth: 1,
 		borderColor: "#cccccc",
 		backgroundColor: "white",
@@ -90,8 +90,21 @@ const styles = StyleSheet.create({
 	addButton: {
 		padding: 10,
 	},
+	cancelButton: {
+		marginTop: 100,
+		padding: 10,
+	},
 	dateTimePicker: {
-		width: 300,
+		width: 250,
 		padding: 30,
+	},
+	upTextView: {
+		justifyContent: "flex-end",
+		height: 300,
+		padding: 8,
+	},
+	upText: {
+		fontWeight: "bold",
+		fontSize: 24,
 	},
 })
