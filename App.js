@@ -15,8 +15,6 @@ export default function App() {
 	}
 
 	function addEvent(eventName, selectedDate) {
-		console.log(selectedDate)
-
 		setEvents((currentEvents) => [
 			...currentEvents,
 			{
