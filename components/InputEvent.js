@@ -1,12 +1,11 @@
 import React, { useState } from "react"
 import {
 	View,
-	Button,
 	TextInput,
 	StyleSheet,
 	Text,
 	Modal,
-	YellowBox,
+	Pressable,
 } from "react-native"
 import DateTimePicker from "@react-native-community/datetimepicker"
 
@@ -44,8 +43,8 @@ function InputEvent(props) {
 						<Text style={styles.upText}>New event</Text>
 					</View>
 					<TextInput
-						placeholder="Event Name"
-						placeholderTextColor={showNoNameWarning ? "#FF8A8A" : ""}
+						placeholder={showNoNameWarning ? "Enter event name!" : "Event Name"}
+						placeholderTextColor={showNoNameWarning ? "#FF8A8A" : "#b5b5d2"}
 						style={styles.inputText}
 						onChangeText={handleInput}
 						value={eventName}
@@ -58,20 +57,25 @@ function InputEvent(props) {
 						is24Hour={true}
 						onChange={onChange}
 						display="spinner"
+						textColor="white"
 					/>
 					<View style={styles.addButton}>
-						<Button title="Add Event" onPress={addEvent} />
+						<Pressable title="Add Event" onPress={addEvent}>
+							<Text style={styles.addButtonText}>Add event</Text>
+						</Pressable>
 					</View>
 					<View style={styles.cancelButton}>
-						<Button
-							title="Cancel"
+						<Pressable
 							onPress={() => {
 								props.onCancel()
 								setShowNoNameWarning(false)
 								setEventName("")
 								setDate(new Date())
 							}}
-						/>
+							style={styles.cancelButton}
+						>
+							<Text style={styles.cancelButtonText}>Cancel</Text>
+						</Pressable>
 					</View>
 				</View>
 			</View>
@@ -88,30 +92,55 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	inputText: {
-		width: "80%",
-		height: 35,
-		maxWidth: "60%",
+		color: "white",
+		fontWeight: "bold",
+		width: "70%",
+		height: 60,
 		borderWidth: 1,
-		borderColor: "#cccccc",
-		backgroundColor: "white",
+		borderColor: "#f2f2f7",
+		borderWidth: 2,
+		borderRadius: 8,
 		marginRight: 8,
-		paddingLeft: 8,
+		paddingLeft: 10,
 	},
 	addButton: {
+		justifyContent: "center",
+		alignItems: "center",
+		width: 110,
+		height: 55,
+		backgroundColor: "white",
+		borderRadius: 10,
 		padding: 10,
 	},
+	addButtonText: {
+		fontWeight: "bold",
+		fontSize: 17,
+	},
 	cancelButton: {
+		marginTop: 10,
+		justifyContent: "center",
+		alignItems: "center",
+		width: 110,
+		height: 55,
+		color: "white",
 		padding: 10,
+	},
+	cancelButtonText: {
+		fontWeight: "bold",
+		fontSize: 17,
+		color: "white",
 	},
 	dateTimePicker: {
 		width: 250,
 		padding: 30,
+		marginBottom: 5,
 	},
 	upTextView: {
 		justifyContent: "flex-end",
 		padding: 8,
 	},
 	upText: {
+		color: "white",
 		fontWeight: "bold",
 		fontSize: 24,
 		marginBottom: 20,
@@ -119,9 +148,14 @@ const styles = StyleSheet.create({
 	modalCard: {
 		width: "100%",
 		height: "60%",
-		backgroundColor: "white",
+		backgroundColor: "#0a64ff",
 		justifyContent: "center",
 		alignItems: "center",
 		borderRadius: 40,
+		shadowColor: "#000",
+		shadowOffset: { width: -3, height: -3 },
+		shadowOpacity: 0.3,
+		shadowRadius: 10,
+		elevation: 5,
 	},
 })
