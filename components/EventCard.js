@@ -1,6 +1,8 @@
 import React, { useState } from "react"
 import { StyleSheet, Text, View, Pressable } from "react-native"
-import { MaterialCommunityIcons } from "@expo/vector-icons"
+import { Feather } from "@expo/vector-icons"
+import "react-native-gesture-handler"
+import Swipeable from "react-native-gesture-handler/Swipeable"
 
 function EventCard(props) {
 	const MILISECONDSINADAY = 3600 * 1000 * 24
@@ -16,37 +18,41 @@ function EventCard(props) {
 	let formatedDate = new Date(props.date).toLocaleDateString()
 	let remainingDays = showRemainingDays(props.date)
 
+	const rightAction = () => {
+		return (
+			<View style={styles.deleteButton}>
+				<Pressable onPress={props.onDeleteEvent.bind(this, props.id)}>
+					<Feather name="trash-2" size={24} style={styles.trashIcon} />
+				</Pressable>
+			</View>
+		)
+	}
 	return (
-		<View style={styles.eventItem}>
-			<View style={styles.leftContainer}>
-				<View style={styles.eventNameView}>
-					<Text style={styles.eventItemText} adjustsFontSizeToFit={true}>
-						{props.name}
-					</Text>
+		<Swipeable renderRightActions={rightAction}>
+			<View style={styles.eventItem}>
+				<View style={styles.leftContainer}>
+					<View style={styles.eventNameView}>
+						<Text style={styles.eventItemText} adjustsFontSizeToFit={true}>
+							{props.name}
+						</Text>
+					</View>
+					<View style={styles.eventDateView}>
+						<Text style={styles.dateText}>{formatedDate}</Text>
+					</View>
 				</View>
-				<View style={styles.eventDateView}>
-					<Text style={styles.dateText}>{formatedDate}</Text>
-				</View>
-			</View>
 
-			<View
-				style={
-					remainingDays <= 0
-						? { ...styles.rightContainer, backgroundColor: "#ee6b6e" }
-						: { ...styles.rightContainer, backgroundColor: "#4e82d8" }
-				}
-				adjustsFontSizeToFit={true}
-			>
-				<Text style={styles.remainingDaysText}>{remainingDays}</Text>
+				<View
+					style={
+						remainingDays <= 0
+							? { ...styles.rightContainer, backgroundColor: "#ee6b6e" }
+							: { ...styles.rightContainer, backgroundColor: "#4e82d8" }
+					}
+					adjustsFontSizeToFit={true}
+				>
+					<Text style={styles.remainingDaysText}>{remainingDays}</Text>
+				</View>
 			</View>
-			<Pressable onPress={props.onDeleteEvent.bind(this, props.id)}>
-				<MaterialCommunityIcons
-					name="dots-vertical"
-					size={24}
-					color="#c7c7cc"
-				/>
-			</Pressable>
-		</View>
+		</Swipeable>
 	)
 }
 
@@ -54,9 +60,9 @@ export default EventCard
 
 const styles = StyleSheet.create({
 	eventItem: {
-		width: "80%",
-		height: 85,
-		aspectRatio: 4 / 1,
+		width: "95%",
+		height: 90,
+		//aspectRatio: 4 / 1,
 		marginBottom: 15,
 		borderRadius: 10,
 		padding: 8,
@@ -64,10 +70,9 @@ const styles = StyleSheet.create({
 		justifyContent: "space-between",
 		alignItems: "center",
 		shadowColor: "#000",
-		shadowOffset: { width: 0, height: 1 },
-		shadowOpacity: 0.5,
-		shadowRadius: 2,
-		elevation: 5,
+		shadowOffset: { width: 1, height: 2 },
+		shadowOpacity: 0.09,
+		shadowRadius: 1,
 		backgroundColor: "white",
 	},
 	leftContainer: {
@@ -76,7 +81,6 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 	},
 	rightContainer: {
-		//backgroundColor: "#6F8AB7",
 		borderRadius: 18,
 		width: 80,
 		height: "85%",
@@ -115,5 +119,16 @@ const styles = StyleSheet.create({
 		width: "90%",
 		height: "30%",
 		marginHorizontal: 10,
+	},
+	rightAction: {
+		alignItems: "center",
+		justifyContent: "center",
+		flex: 1,
+	},
+	trashIcon: {
+		color: "#dd2c00",
+		padding: 10,
+		marginTop: 20,
+		marginRight: 30,
 	},
 })

@@ -105,7 +105,9 @@ const styles = StyleSheet.create({
 		width: "100%",
 	},
 	contentContainerStyle: {
+		alignContent: "center",
 		alignItems: "center",
+		marginLeft: "5%",
 	},
 	addButtonContainer: {
 		width: "100%",
