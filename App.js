@@ -99,7 +99,6 @@ const styles = StyleSheet.create({
 		fontSize: 15,
 	},
 	listContainer: {
-		padding: 10,
 		paddingTop: 20,
 		flex: 1,
 		width: "100%",
@@ -107,7 +106,6 @@ const styles = StyleSheet.create({
 	contentContainerStyle: {
 		alignContent: "center",
 		alignItems: "center",
-		marginLeft: "5%",
 	},
 	addButtonContainer: {
 		width: "100%",

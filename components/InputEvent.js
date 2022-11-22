@@ -48,6 +48,7 @@ function InputEvent(props) {
 						style={styles.inputText}
 						onChangeText={handleInput}
 						value={eventName}
+						selectionColor={"white"}
 					/>
 					<DateTimePicker
 						style={styles.dateTimePicker}

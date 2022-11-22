@@ -24,6 +24,7 @@ function EventCard(props) {
 				<Pressable onPress={props.onDeleteEvent.bind(this, props.id)}>
 					<Feather name="trash-2" size={24} style={styles.trashIcon} />
 				</Pressable>
+				<Text style={styles.deleteText}>Delete</Text>
 			</View>
 		)
 	}
@@ -61,9 +62,9 @@ export default EventCard
 const styles = StyleSheet.create({
 	eventItem: {
 		width: "95%",
-		height: 90,
-		//aspectRatio: 4 / 1,
-		marginBottom: 15,
+		aspectRatio: 4 / 1,
+		margin: 10,
+		//marginBottom: 15,
 		borderRadius: 10,
 		padding: 8,
 		flexDirection: "row",
@@ -71,8 +72,8 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		shadowColor: "#000",
 		shadowOffset: { width: 1, height: 2 },
-		shadowOpacity: 0.09,
-		shadowRadius: 1,
+		shadowOpacity: 0.1,
+		shadowRadius: 1.5,
 		backgroundColor: "white",
 	},
 	leftContainer: {
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
 	},
 	rightContainer: {
 		borderRadius: 18,
-		width: 80,
+		width: "22%",
 		height: "85%",
 		justifyContent: "center",
 		alignItems: "center",
@@ -125,10 +126,18 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		flex: 1,
 	},
+	deleteButton: {
+		width: 100,
+		justifyContent: "center",
+		alignItems: "center",
+	},
 	trashIcon: {
 		color: "#dd2c00",
 		padding: 10,
-		marginTop: 20,
-		marginRight: 30,
+		marginRight: 20,
+	},
+	deleteText: {
+		color: "red",
+		marginRight: 20,
 	},
 })
