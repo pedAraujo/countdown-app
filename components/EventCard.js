@@ -33,7 +33,7 @@ function EventCard(props) {
 			<View style={styles.eventItem}>
 				<View style={styles.leftContainer}>
 					<View style={styles.eventNameView}>
-						<Text style={styles.eventItemText} adjustsFontSizeToFit={true}>
+						<Text style={styles.eventItemText} numberOfLines={1}>
 							{props.name}
 						</Text>
 					</View>
