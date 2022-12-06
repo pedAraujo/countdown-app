@@ -41,12 +41,19 @@ export default function App() {
 		)
 	}
 
+	const ListHeader = () => {
+		return (
+			<View style={{ width: "100%", height: 100 }}>
+				<View style={styles.upTextView}>
+					<Text style={styles.upText}>My events</Text>
+					<Text style={styles.upDate}>{TODAY}</Text>
+				</View>
+			</View>
+		)
+	}
+
 	return (
 		<View style={styles.appContainer}>
-			<View style={styles.upTextView}>
-				<Text style={styles.upText}>My events</Text>
-				<Text style={styles.upDate}>{TODAY}</Text>
-			</View>
 			<FlatList
 				style={styles.listContainer}
 				data={events}
@@ -61,8 +68,9 @@ export default function App() {
 					)
 				}}
 				keyExtractor={(item, index) => item.id}
-				alwaysBounceHorizontal={false}
 				contentContainerStyle={styles.contentContainerStyle}
+				ListHeaderComponent={ListHeader}
+				stickyHeaderIndices={[0]}
 			/>
 			<View style={styles.addButtonContainer}>
 				<AddButton />
@@ -79,13 +87,14 @@ export default function App() {
 const styles = StyleSheet.create({
 	appContainer: {
 		flex: 1,
-		paddingTop: 10,
 		marginTop: 40,
 		alignItems: "center",
 	},
 	upTextView: {
-		width: "90%",
-		padding: 8,
+		width: 400,
+		padding: 10,
+		paddingLeft: 40,
+		backgroundColor: "rgba(242, 242, 247, 0.9)",
 	},
 	upText: {
 		fontWeight: "bold",
@@ -99,8 +108,6 @@ const styles = StyleSheet.create({
 		fontSize: 15,
 	},
 	listContainer: {
-		paddingTop: 20,
-		flex: 1,
 		width: "100%",
 	},
 	contentContainerStyle: {
