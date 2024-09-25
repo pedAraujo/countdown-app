@@ -1,6 +1,6 @@
 # countdown-app
 
-**Countdown** is a simple productivity app that helps you keep track of how many days are left until your next event. With a sleek interface and custom widgets for iPhone and Mac, **Countdown** makes it easy to stay organized and on top of your schedule.
+**Countdown** is a simple productivity app that helps you keep track of how many days are left until your next event, making it easy to stay organized and on top of your schedule.
 
 ## Features
 
