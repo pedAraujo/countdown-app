@@ -1,5 +1,3 @@
-// countdown-frontend/components/FloatingButton.js
-
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
@@ -22,7 +20,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#007BFF",
         justifyContent: "center",
         alignItems: "center",
-        elevation: 5, // Para adicionar sombra no Android
+        elevation: 5,
     },
     buttonText: {
         color: "#fff",
